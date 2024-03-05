@@ -5,6 +5,7 @@ import 'package:reza_reservation/app/data/addon/reusable.dart';
 import 'package:reza_reservation/app/data/enums/enums.dart';
 import 'package:reza_reservation/app/data/model/pesanan/pesanan_model.dart';
 import 'package:reza_reservation/app/data/model/rekening/rekening_model.dart';
+import 'package:reza_reservation/app/data/model/wisata/wisata_model.dart';
 import 'package:reza_reservation/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
@@ -313,6 +314,14 @@ class HomeDrawer extends StatelessWidget {
               },
               title: const Text('Data Rekening'),
             ),
+            ListTile(
+              onTap: () {
+                controller.currentPage.value = 2;
+
+                Get.back();
+              },
+              title: const Text('Data Wisata'),
+            ),
           ],
         );
       },
@@ -458,6 +467,149 @@ class RekeningItemCard extends StatelessWidget {
               trailing: GestureDetector(
                 onTap: () async {
                   await controller.rekeningRepo.deleteRekening(rekening: model);
+                },
+                child: const Icon(
+                  Icons.delete,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+}
+
+// Wista page
+class WisataPage extends StatelessWidget {
+  const WisataPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(
+      builder: (controller) => Column(
+        children: [
+          Row(
+            children: [
+              Flexible(
+                child: Reusable.customTextfield(
+                  hint: 'cari wisata dari nama',
+                  onChanged: (p0) => controller.rekeningSearch.value = p0,
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(Routes.TAMBAH_WISATA);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: ColorPalette.buttonColor,
+                    boxShadow: Reusable.deafultBoxShadow,
+                  ),
+                  child: const Icon(
+                    Icons.add,
+                    color: ColorPalette.textButtonColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const WisataBody(),
+        ],
+      ),
+    );
+  }
+}
+
+class WisataBody extends StatelessWidget {
+  const WisataBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GetBuilder<HomeController>(
+        builder: (controller) {
+          return Obx(
+            () {
+              return controller.daftarWisata.isNotEmpty
+                  ? ListView(
+                      children: controller.daftarWisata.indexed
+                          .where(
+                            (p0) => p0.$2.nama_wisata.toLowerCase().contains(
+                                controller.rekeningSearch.toLowerCase()),
+                          )
+                          .map(
+                            (e) => WisataCard(
+                                model: controller.daftarWisata[e.$1],
+                                index: e.$1),
+                          )
+                          .toList(),
+                    )
+                  : const Text('Tidak ada data');
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class WisataCard extends StatelessWidget {
+  const WisataCard({
+    super.key,
+    required this.model,
+    required this.index,
+  });
+
+  final int index;
+  final WisataModel model;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(builder: (controller) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        decoration: BoxDecoration(
+          color: index % 2 == 0
+              ? ColorPalette.backgroundColor
+              : Colors.grey.shade200,
+          border: const Border(
+            bottom: BorderSide(
+              width: 0.5,
+              color: Colors.grey,
+            ),
+            top: BorderSide(
+              width: 0.5,
+              color: Colors.grey,
+            ),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+              contentPadding: const EdgeInsets.all(0),
+              title: Text(
+                model.nama_wisata.capitalizeFirst!,
+              ),
+              subtitle: Text(
+                Reusable.moneyFormat(model.harga),
+                style: const TextStyle(
+                  color: ColorPalette.buttonColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              trailing: GestureDetector(
+                onTap: () async {
+                  // await controller.rekeningRepo.deleteRekening(rekening: model);
                 },
                 child: const Icon(
                   Icons.delete,

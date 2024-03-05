@@ -9,6 +9,7 @@ abstract class Routes {
   static const TAMBAH_REKENING = _Paths.TAMBAH_REKENING;
   static const DETAIL_PESANAN = _Paths.DETAIL_PESANAN;
   static const AUTHENTICATINO = _Paths.AUTHENTICATINO;
+  static const TAMBAH_WISATA = _Paths.TAMBAH_WISATA;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const TAMBAH_REKENING = '/tambah-rekening';
   static const DETAIL_PESANAN = '/detail-pesanan';
   static const AUTHENTICATINO = '/authenticatino';
+  static const TAMBAH_WISATA = '/tambah-wisata';
 }

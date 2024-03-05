@@ -26,11 +26,10 @@ mixin _$PesananModel {
   String get namaRekeningPemesan => throw _privateConstructorUsedError;
   String get nomorRekeningPemesan => throw _privateConstructorUsedError;
   String get namaBankPemesan => throw _privateConstructorUsedError;
-  String get namaWisata => throw _privateConstructorUsedError;
-  String get hargaDasar => throw _privateConstructorUsedError;
+  WisataModel get wisata => throw _privateConstructorUsedError;
+  RekeningModel get rekeningPenerima => throw _privateConstructorUsedError;
   String get jumlahTicket => throw _privateConstructorUsedError;
   String get totalHarga => throw _privateConstructorUsedError;
-  RekeningModel get rekeningPenerima => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get ownerId => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
@@ -54,15 +53,15 @@ abstract class $PesananModelCopyWith<$Res> {
       String namaRekeningPemesan,
       String nomorRekeningPemesan,
       String namaBankPemesan,
-      String namaWisata,
-      String hargaDasar,
+      WisataModel wisata,
+      RekeningModel rekeningPenerima,
       String jumlahTicket,
       String totalHarga,
-      RekeningModel rekeningPenerima,
       String image,
       String ownerId,
       String status});
 
+  $WisataModelCopyWith<$Res> get wisata;
   $RekeningModelCopyWith<$Res> get rekeningPenerima;
 }
 
@@ -85,11 +84,10 @@ class _$PesananModelCopyWithImpl<$Res, $Val extends PesananModel>
     Object? namaRekeningPemesan = null,
     Object? nomorRekeningPemesan = null,
     Object? namaBankPemesan = null,
-    Object? namaWisata = null,
-    Object? hargaDasar = null,
+    Object? wisata = null,
+    Object? rekeningPenerima = null,
     Object? jumlahTicket = null,
     Object? totalHarga = null,
-    Object? rekeningPenerima = null,
     Object? image = null,
     Object? ownerId = null,
     Object? status = null,
@@ -119,14 +117,14 @@ class _$PesananModelCopyWithImpl<$Res, $Val extends PesananModel>
           ? _value.namaBankPemesan
           : namaBankPemesan // ignore: cast_nullable_to_non_nullable
               as String,
-      namaWisata: null == namaWisata
-          ? _value.namaWisata
-          : namaWisata // ignore: cast_nullable_to_non_nullable
-              as String,
-      hargaDasar: null == hargaDasar
-          ? _value.hargaDasar
-          : hargaDasar // ignore: cast_nullable_to_non_nullable
-              as String,
+      wisata: null == wisata
+          ? _value.wisata
+          : wisata // ignore: cast_nullable_to_non_nullable
+              as WisataModel,
+      rekeningPenerima: null == rekeningPenerima
+          ? _value.rekeningPenerima
+          : rekeningPenerima // ignore: cast_nullable_to_non_nullable
+              as RekeningModel,
       jumlahTicket: null == jumlahTicket
           ? _value.jumlahTicket
           : jumlahTicket // ignore: cast_nullable_to_non_nullable
@@ -135,10 +133,6 @@ class _$PesananModelCopyWithImpl<$Res, $Val extends PesananModel>
           ? _value.totalHarga
           : totalHarga // ignore: cast_nullable_to_non_nullable
               as String,
-      rekeningPenerima: null == rekeningPenerima
-          ? _value.rekeningPenerima
-          : rekeningPenerima // ignore: cast_nullable_to_non_nullable
-              as RekeningModel,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -152,6 +146,14 @@ class _$PesananModelCopyWithImpl<$Res, $Val extends PesananModel>
           : status // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WisataModelCopyWith<$Res> get wisata {
+    return $WisataModelCopyWith<$Res>(_value.wisata, (value) {
+      return _then(_value.copyWith(wisata: value) as $Val);
+    });
   }
 
   @override
@@ -178,15 +180,16 @@ abstract class _$$PesananModelImplCopyWith<$Res>
       String namaRekeningPemesan,
       String nomorRekeningPemesan,
       String namaBankPemesan,
-      String namaWisata,
-      String hargaDasar,
+      WisataModel wisata,
+      RekeningModel rekeningPenerima,
       String jumlahTicket,
       String totalHarga,
-      RekeningModel rekeningPenerima,
       String image,
       String ownerId,
       String status});
 
+  @override
+  $WisataModelCopyWith<$Res> get wisata;
   @override
   $RekeningModelCopyWith<$Res> get rekeningPenerima;
 }
@@ -208,11 +211,10 @@ class __$$PesananModelImplCopyWithImpl<$Res>
     Object? namaRekeningPemesan = null,
     Object? nomorRekeningPemesan = null,
     Object? namaBankPemesan = null,
-    Object? namaWisata = null,
-    Object? hargaDasar = null,
+    Object? wisata = null,
+    Object? rekeningPenerima = null,
     Object? jumlahTicket = null,
     Object? totalHarga = null,
-    Object? rekeningPenerima = null,
     Object? image = null,
     Object? ownerId = null,
     Object? status = null,
@@ -242,14 +244,14 @@ class __$$PesananModelImplCopyWithImpl<$Res>
           ? _value.namaBankPemesan
           : namaBankPemesan // ignore: cast_nullable_to_non_nullable
               as String,
-      namaWisata: null == namaWisata
-          ? _value.namaWisata
-          : namaWisata // ignore: cast_nullable_to_non_nullable
-              as String,
-      hargaDasar: null == hargaDasar
-          ? _value.hargaDasar
-          : hargaDasar // ignore: cast_nullable_to_non_nullable
-              as String,
+      wisata: null == wisata
+          ? _value.wisata
+          : wisata // ignore: cast_nullable_to_non_nullable
+              as WisataModel,
+      rekeningPenerima: null == rekeningPenerima
+          ? _value.rekeningPenerima
+          : rekeningPenerima // ignore: cast_nullable_to_non_nullable
+              as RekeningModel,
       jumlahTicket: null == jumlahTicket
           ? _value.jumlahTicket
           : jumlahTicket // ignore: cast_nullable_to_non_nullable
@@ -258,10 +260,6 @@ class __$$PesananModelImplCopyWithImpl<$Res>
           ? _value.totalHarga
           : totalHarga // ignore: cast_nullable_to_non_nullable
               as String,
-      rekeningPenerima: null == rekeningPenerima
-          ? _value.rekeningPenerima
-          : rekeningPenerima // ignore: cast_nullable_to_non_nullable
-              as RekeningModel,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -288,11 +286,10 @@ class _$PesananModelImpl implements _PesananModel {
       required this.namaRekeningPemesan,
       required this.nomorRekeningPemesan,
       required this.namaBankPemesan,
-      required this.namaWisata,
-      required this.hargaDasar,
+      required this.wisata,
+      required this.rekeningPenerima,
       required this.jumlahTicket,
       required this.totalHarga,
-      required this.rekeningPenerima,
       required this.image,
       required this.ownerId,
       required this.status});
@@ -313,15 +310,13 @@ class _$PesananModelImpl implements _PesananModel {
   @override
   final String namaBankPemesan;
   @override
-  final String namaWisata;
+  final WisataModel wisata;
   @override
-  final String hargaDasar;
+  final RekeningModel rekeningPenerima;
   @override
   final String jumlahTicket;
   @override
   final String totalHarga;
-  @override
-  final RekeningModel rekeningPenerima;
   @override
   final String image;
   @override
@@ -331,7 +326,7 @@ class _$PesananModelImpl implements _PesananModel {
 
   @override
   String toString() {
-    return 'PesananModel(id: $id, namaPemesan: $namaPemesan, nomorPemesan: $nomorPemesan, namaRekeningPemesan: $namaRekeningPemesan, nomorRekeningPemesan: $nomorRekeningPemesan, namaBankPemesan: $namaBankPemesan, namaWisata: $namaWisata, hargaDasar: $hargaDasar, jumlahTicket: $jumlahTicket, totalHarga: $totalHarga, rekeningPenerima: $rekeningPenerima, image: $image, ownerId: $ownerId, status: $status)';
+    return 'PesananModel(id: $id, namaPemesan: $namaPemesan, nomorPemesan: $nomorPemesan, namaRekeningPemesan: $namaRekeningPemesan, nomorRekeningPemesan: $nomorRekeningPemesan, namaBankPemesan: $namaBankPemesan, wisata: $wisata, rekeningPenerima: $rekeningPenerima, jumlahTicket: $jumlahTicket, totalHarga: $totalHarga, image: $image, ownerId: $ownerId, status: $status)';
   }
 
   @override
@@ -350,16 +345,13 @@ class _$PesananModelImpl implements _PesananModel {
                 other.nomorRekeningPemesan == nomorRekeningPemesan) &&
             (identical(other.namaBankPemesan, namaBankPemesan) ||
                 other.namaBankPemesan == namaBankPemesan) &&
-            (identical(other.namaWisata, namaWisata) ||
-                other.namaWisata == namaWisata) &&
-            (identical(other.hargaDasar, hargaDasar) ||
-                other.hargaDasar == hargaDasar) &&
+            (identical(other.wisata, wisata) || other.wisata == wisata) &&
+            (identical(other.rekeningPenerima, rekeningPenerima) ||
+                other.rekeningPenerima == rekeningPenerima) &&
             (identical(other.jumlahTicket, jumlahTicket) ||
                 other.jumlahTicket == jumlahTicket) &&
             (identical(other.totalHarga, totalHarga) ||
                 other.totalHarga == totalHarga) &&
-            (identical(other.rekeningPenerima, rekeningPenerima) ||
-                other.rekeningPenerima == rekeningPenerima) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.status, status) || other.status == status));
@@ -375,11 +367,10 @@ class _$PesananModelImpl implements _PesananModel {
       namaRekeningPemesan,
       nomorRekeningPemesan,
       namaBankPemesan,
-      namaWisata,
-      hargaDasar,
+      wisata,
+      rekeningPenerima,
       jumlahTicket,
       totalHarga,
-      rekeningPenerima,
       image,
       ownerId,
       status);
@@ -406,11 +397,10 @@ abstract class _PesananModel implements PesananModel {
       required final String namaRekeningPemesan,
       required final String nomorRekeningPemesan,
       required final String namaBankPemesan,
-      required final String namaWisata,
-      required final String hargaDasar,
+      required final WisataModel wisata,
+      required final RekeningModel rekeningPenerima,
       required final String jumlahTicket,
       required final String totalHarga,
-      required final RekeningModel rekeningPenerima,
       required final String image,
       required final String ownerId,
       required final String status}) = _$PesananModelImpl;
@@ -431,15 +421,13 @@ abstract class _PesananModel implements PesananModel {
   @override
   String get namaBankPemesan;
   @override
-  String get namaWisata;
+  WisataModel get wisata;
   @override
-  String get hargaDasar;
+  RekeningModel get rekeningPenerima;
   @override
   String get jumlahTicket;
   @override
   String get totalHarga;
-  @override
-  RekeningModel get rekeningPenerima;
   @override
   String get image;
   @override

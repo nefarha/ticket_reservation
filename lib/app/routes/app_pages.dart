@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:reza_reservation/app/data/middlewares/home_auth_middlewares.dart';
 
+import '../data/middlewares/home_auth_middlewares.dart';
 import '../modules/Authenticatino/bindings/authenticatino_binding.dart';
 import '../modules/Authenticatino/views/authenticatino_view.dart';
 import '../modules/BuatPesanan/bindings/buat_pesanan_binding.dart';
@@ -11,6 +11,8 @@ import '../modules/Landing/bindings/landing_binding.dart';
 import '../modules/Landing/views/landing_view.dart';
 import '../modules/TambahRekening/bindings/tambah_rekening_binding.dart';
 import '../modules/TambahRekening/views/tambah_rekening_view.dart';
+import '../modules/TambahWisata/bindings/tambah_wisata_binding.dart';
+import '../modules/TambahWisata/views/tambah_wisata_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 
@@ -54,6 +56,11 @@ class AppPages {
       name: _Paths.AUTHENTICATINO,
       page: () => const AuthenticatinoView(),
       binding: AuthenticatinoBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_WISATA,
+      page: () => const TambahWisataView(),
+      binding: TambahWisataBinding(),
     ),
   ];
 }

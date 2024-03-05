@@ -12,23 +12,27 @@ import 'package:reza_reservation/app/data/model/pesanan/repo/pesanan_repo.dart';
 import 'package:reza_reservation/app/data/model/rekening/rekening_model.dart';
 import 'package:reza_reservation/app/data/model/rekening/repo/rekening_repo.dart';
 import 'package:reza_reservation/app/data/model/user/user_model.dart';
+import 'package:reza_reservation/app/data/model/wisata/repo/wisata_repo.dart';
+import 'package:reza_reservation/app/data/model/wisata/wisata_model.dart';
 
 class BuatPesananController extends GetxController {
   final pesananRepo = PesananRepo();
   final rekeningRepo = RekeningRepo();
+  final wisataRepo = WisataRepo();
   final storageC = StorageController();
   UserModel? get user => UserController.instance.user.value;
 
   RxList<RekeningModel> daftarRekening = RxList.empty();
+  RxList<WisataModel> daftarWisata = RxList.empty();
   Rxn<RekeningModel> selectedRekening = Rxn();
-  Rx<Wisata> selectedWisata = Rx(Wisata.taman_air);
+  Rxn<WisataModel> selectedWisata = Rxn();
   RxnString selectedImage = RxnString();
   RxnString selectedImageName = RxnString();
   RxInt jumlahTicket = 1.obs;
   var isLoading = false.obs;
 
   String get totalHarga =>
-      (wisataHarga(selectedWisata.value) * jumlahTicket.value).toString();
+      ((selectedWisata.value?.harga ?? 0) * jumlahTicket.value).toString();
 
   Future pickFile() async {
     var pickFile = await FilePicker.platform.pickFiles(allowMultiple: false);
@@ -48,7 +52,9 @@ class BuatPesananController extends GetxController {
 
   Future createPesanan() async {
     isLoading.toggle();
-    if (selectedImage.value != null && selectedRekening.value != null) {
+    if (selectedImage.value != null &&
+        selectedRekening.value != null &&
+        selectedWisata.value != null) {
       await storageC
           .uploadBuktiGambar(
         id: user!.id,
@@ -62,8 +68,7 @@ class BuatPesananController extends GetxController {
           namaRekeningPemesan: namaPemilikController.text,
           nomorRekeningPemesan: nomorRekeningController.text,
           namaBankPemesan: namaBankController.text,
-          namaWisata: selectedWisata.value.name,
-          hargaDasar: wisataHarga(selectedWisata.value).toString(),
+          wisata: selectedWisata.value!,
           jumlahTicket: jumlahTicket.value.toString(),
           totalHarga: totalHarga,
           rekeningPenerima: selectedRekening.value!,
@@ -84,6 +89,7 @@ class BuatPesananController extends GetxController {
   @override
   void onInit() {
     daftarRekening.bindStream(rekeningRepo.getAllRekening());
+    daftarWisata.bindStream(wisataRepo.getAllWisata());
     super.onInit();
   }
 }

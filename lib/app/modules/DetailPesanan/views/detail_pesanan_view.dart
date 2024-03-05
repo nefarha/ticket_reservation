@@ -139,7 +139,7 @@ class DetailPesananView extends GetView<DetailPesananController> {
                   ListTile(
                     contentPadding: const EdgeInsets.all(0),
                     title: Text(
-                      controller.pesananModel.namaWisata,
+                      controller.pesananModel.wisata.nama_wisata,
                       style: const TextStyle(
                           fontWeight: FontWeight.w500, fontSize: 16),
                     ),
@@ -147,7 +147,7 @@ class DetailPesananView extends GetView<DetailPesananController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${controller.pesananModel.jumlahTicket} ticket x ${Reusable.moneyFormat(int.parse(controller.pesananModel.hargaDasar))}',
+                          '${controller.pesananModel.jumlahTicket} ticket x ${Reusable.moneyFormat(controller.pesananModel.wisata.harga)}',
                         ),
                         Text(
                           Reusable.moneyFormat(

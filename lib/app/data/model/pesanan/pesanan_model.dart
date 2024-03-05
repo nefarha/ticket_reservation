@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reza_reservation/app/data/model/rekening/rekening_model.dart';
+import 'package:reza_reservation/app/data/model/wisata/wisata_model.dart';
 
 part 'pesanan_model.freezed.dart';
 part 'pesanan_model.g.dart';
@@ -13,11 +14,10 @@ class PesananModel with _$PesananModel {
       required String namaRekeningPemesan,
       required String nomorRekeningPemesan,
       required String namaBankPemesan,
-      required String namaWisata,
-      required String hargaDasar,
+      required WisataModel wisata,
+      required RekeningModel rekeningPenerima,
       required String jumlahTicket,
       required String totalHarga,
-      required RekeningModel rekeningPenerima,
       required String image,
       required String ownerId,
       required String status}) = _PesananModel;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reza_reservation/app/data/addon/color_paletter.dart';
 import 'package:reza_reservation/app/data/addon/reusable.dart';
-import 'package:reza_reservation/app/data/enums/enums.dart';
 
 import '../controllers/buat_pesanan_controller.dart';
 
@@ -142,13 +141,12 @@ class BuatPesananView extends GetView<BuatPesananController> {
                                 child: DropdownButton(
                                   value: controller.selectedWisata.value,
                                   isExpanded: true,
-                                  items: Wisata.values
+                                  items: controller.daftarWisata
                                       .map(
                                         (e) => DropdownMenuItem(
                                           value: e,
-                                          child: Text(e.name
-                                              .replaceAll('_', ' ')
-                                              .capitalizeFirst!),
+                                          child: Text(
+                                              e.nama_wisata.capitalizeFirst!),
                                         ),
                                       )
                                       .toList(),
@@ -165,8 +163,8 @@ class BuatPesananView extends GetView<BuatPesananController> {
                                   const Spacer(),
                                   Text(
                                     Reusable.moneyFormat(
-                                      wisataHarga(
-                                          controller.selectedWisata.value),
+                                      controller.selectedWisata.value?.harga ??
+                                          0,
                                     ),
                                   ),
                                 ],
@@ -211,7 +209,8 @@ class BuatPesananView extends GetView<BuatPesananController> {
                                   const Spacer(),
                                   Text(
                                     Reusable.moneyFormat(
-                                        int.parse(controller.totalHarga)),
+                                      int.parse(controller.totalHarga),
+                                    ),
                                   ),
                                 ],
                               ),
