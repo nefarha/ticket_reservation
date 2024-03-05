@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "75557336193",
+    "project_id": "tiketreservation-9c9b9",
+    "storage_bucket": "tiketreservation-9c9b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75557336193:android:d37c67ab138e7339d6c980",
+        "android_client_info": {
+          "package_name": "com.example.reza_reservation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzt7YnIZIb_ov3ovsUfadtuk1ppM6Uv4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75557336193:android:2c7ecdfe0b52f116d6c980",
+        "android_client_info": {
+          "package_name": "com.ticketreservation.reza_ticket_user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzt7YnIZIb_ov3ovsUfadtuk1ppM6Uv4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
