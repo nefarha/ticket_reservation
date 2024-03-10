@@ -4,7 +4,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reza_reservation/app/controllers/storage_controller.dart';
-import 'package:reza_reservation/app/controllers/user_controller.dart';
 import 'package:reza_reservation/app/data/addon/reusable.dart';
 import 'package:reza_reservation/app/data/enums/enums.dart';
 import 'package:reza_reservation/app/data/model/pesanan/pesanan_model.dart';
@@ -20,7 +19,7 @@ class BuatPesananController extends GetxController {
   final rekeningRepo = RekeningRepo();
   final wisataRepo = WisataRepo();
   final storageC = StorageController();
-  UserModel? get user => UserController.instance.user.value;
+  UserModel get user => Get.arguments;
 
   RxList<RekeningModel> daftarRekening = RxList.empty();
   RxList<WisataModel> daftarWisata = RxList.empty();
@@ -57,23 +56,23 @@ class BuatPesananController extends GetxController {
         selectedWisata.value != null) {
       await storageC
           .uploadBuktiGambar(
-        id: user!.id.toString(),
+        id: user.id.toString(),
         file: File(selectedImage.value!),
       )
           .then((value) async {
         var pesanan = PesananModel(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
           namaPemesan: nameController.text,
-          nomorPemesan: nomorHpController.text,
+          nomorPemesan: int.parse(nomorHpController.text),
           namaRekeningPemesan: namaPemilikController.text,
-          nomorRekeningPemesan: nomorRekeningController.text,
+          nomorRekeningPemesan: int.parse(nomorRekeningController.text),
           namaBankPemesan: namaBankController.text,
-          wisata: selectedWisata.value!,
-          jumlahTicket: jumlahTicket.value.toString(),
+          wisata: selectedWisata.value!.id!.toInt(),
+          jumlahTicket: jumlahTicket.value,
           totalHarga: totalHarga,
-          rekeningPenerima: selectedRekening.value!,
+          rekeningPenerima: selectedRekening.value!.id!.toInt(),
           image: value,
-          ownerId: user!.id.toString(),
+          ownerId: user.id!,
+          creator: user.accountType,
           status: StatusPesanan.pending.name,
         );
         await pesananRepo.createPesanan(pesanan: pesanan);
@@ -86,10 +85,18 @@ class BuatPesananController extends GetxController {
     }
   }
 
+  Future getRekening() async {
+    daftarRekening.value = await rekeningRepo.getAllRekening();
+  }
+
+  Future getWisata() async {
+    daftarWisata.value = await wisataRepo.getAllWisata();
+  }
+
   @override
   void onInit() async {
-    daftarRekening.value = await rekeningRepo.getAllRekening();
-    daftarWisata.value = await wisataRepo.getAllWisata();
+    getWisata();
+    getRekening();
     super.onInit();
   }
 }

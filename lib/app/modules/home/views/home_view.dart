@@ -51,15 +51,22 @@ class BerandaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        DataViewHeader(),
-        SizedBox(
-          height: 30,
+    return GetBuilder<HomeController>(builder: (controller) {
+      return FocusDetector(
+        onFocusGained: () async {
+          await controller.getPesanan();
+        },
+        child: const Column(
+          children: [
+            DataViewHeader(),
+            SizedBox(
+              height: 30,
+            ),
+            DataList(),
+          ],
         ),
-        DataList(),
-      ],
-    );
+      );
+    });
   }
 }
 
@@ -88,7 +95,8 @@ class DataViewHeader extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(Routes.BUAT_PESANAN);
+                      Get.toNamed(Routes.BUAT_PESANAN,
+                          arguments: controller.user);
                     },
                     child: Container(
                       padding: const EdgeInsets.all(16),
@@ -210,48 +218,51 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Get.toNamed(Routes.DETAIL_PESANAN, arguments: model),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        decoration: BoxDecoration(
-          color: index % 2 == 0
-              ? ColorPalette.backgroundColor
-              : Colors.grey.shade200,
-          border: const Border(
-            bottom: BorderSide(
-              width: 0.5,
-              color: Colors.grey,
-            ),
-            top: BorderSide(
-              width: 0.5,
-              color: Colors.grey,
+    return GetBuilder<HomeController>(builder: (controller) {
+      return GestureDetector(
+        onTap: () => Get.toNamed(Routes.DETAIL_PESANAN,
+            arguments: [model, controller.user]),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          decoration: BoxDecoration(
+            color: index % 2 == 0
+                ? ColorPalette.backgroundColor
+                : Colors.grey.shade200,
+            border: const Border(
+              bottom: BorderSide(
+                width: 0.5,
+                color: Colors.grey,
+              ),
+              top: BorderSide(
+                width: 0.5,
+                color: Colors.grey,
+              ),
             ),
           ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ListTile(
-              contentPadding: const EdgeInsets.all(0),
-              title: Text(model.namaPemesan),
-              subtitle: const Text('Nama Wisata'),
-              trailing: const Icon(
-                Icons.keyboard_arrow_right,
-                size: 30,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                title: Text(model.namaPemesan),
+                subtitle: Text(model.status),
+                trailing: const Icon(
+                  Icons.keyboard_arrow_right,
+                  size: 30,
+                ),
               ),
-            ),
-            Text(
-              Reusable.moneyFormat(int.parse(model.totalHarga)),
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w500,
+              Text(
+                Reusable.moneyFormat(int.parse(model.totalHarga)),
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 

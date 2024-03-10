@@ -1,23 +1,33 @@
 import 'package:get/get.dart';
-import 'package:reza_reservation/app/controllers/user_controller.dart';
 import 'package:reza_reservation/app/data/enums/enums.dart';
-import 'package:reza_reservation/app/data/model/pesanan/pesanan_model.dart';
 import 'package:reza_reservation/app/data/model/pesanan/repo/pesanan_repo.dart';
+import 'package:reza_reservation/app/data/model/pesanan/viewModel/pesanan_view_model.dart';
 import 'package:reza_reservation/app/data/model/user/user_model.dart';
 
-class DetailPesananController extends GetxController {
-  PesananModel pesananModel = Get.arguments;
-  UserModel? get user => UserController.instance.user.value;
+class DetailPesananController extends GetxController
+    with StateMixin<PesananViewModel> {
+  Rxn<PesananViewModel> pesananModel = Rxn();
+  UserModel get user => Get.arguments[1];
   final pesananRepo = PesananRepo();
 
   Future updatePesanan({required bool isAccept}) async {
     if (isAccept) {
       await pesananRepo.updatePesanan(
-          pesanan: pesananModel, newStatus: StatusPesanan.diterima);
+          id: pesananModel.value!.id!, newStatus: StatusPesanan.diterima);
     } else {
       await pesananRepo.updatePesanan(
-          pesanan: pesananModel, newStatus: StatusPesanan.ditolak);
+          id: pesananModel.value!.id!, newStatus: StatusPesanan.ditolak);
     }
     Get.back();
+  }
+
+  @override
+  void onInit() async {
+    pesananModel.value =
+        await pesananRepo.showPesanan(id: Get.arguments[0].id).then((value) {
+      change(value, status: RxStatus.success());
+      return value;
+    });
+    super.onInit();
   }
 }

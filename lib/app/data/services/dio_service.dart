@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:reza_reservation/app/data/model/base_response/base_response.dart';
+import 'package:reza_reservation/app/data/model/pesanan/pesanan_model.dart';
+import 'package:reza_reservation/app/data/model/pesanan/viewModel/pesanan_view_model.dart';
 import 'package:reza_reservation/app/data/model/rekening/rekening_model.dart';
 import 'package:reza_reservation/app/data/model/user/user_model.dart';
 import 'package:reza_reservation/app/data/model/wisata/wisata_model.dart';
@@ -136,5 +138,50 @@ class DioService {
     await dio.delete(
       '$wisataUrl/$id',
     );
+  }
+
+  // Pesanan
+  Future<BaseResponse> CreatePesanan({
+    required PesananModel model,
+  }) async {
+    var response = await dio.post(pesananUrl, data: model.toJson());
+
+    final baseResponse = BaseResponse.fromJson(response.data);
+
+    return baseResponse;
+  }
+
+  Future<List<PesananModel>> ReadPesanan({required String accountType}) async {
+    var response = await dio.get(pesananUrl, queryParameters: {
+      "creator": accountType,
+    });
+
+    final baseResponse = BaseResponse.fromJson(response.data);
+    if (baseResponse.status == 200) {
+      var list = baseResponse.data as List;
+
+      List<PesananModel> daftarRekening =
+          list.map((e) => PesananModel.fromJson(e)).toList();
+
+      return daftarRekening;
+    } else {
+      return [];
+    }
+  }
+
+  Future<PesananViewModel?> showPesanan({required int id}) async {
+    var response = await dio.get("$pesananUrl/$id");
+
+    final baseResponse = BaseResponse.fromJson(response.data);
+    if (baseResponse.status == 200) {
+      return PesananViewModel.fromJson(baseResponse.data);
+    } else {
+      return null;
+    }
+  }
+
+  Future updatePesanan({required int id, required String newStatus}) async {
+    var response =
+        await dio.put("$pesananUrl/$id", data: {'status': newStatus});
   }
 }

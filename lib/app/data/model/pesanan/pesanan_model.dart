@@ -8,18 +8,19 @@ part 'pesanan_model.g.dart';
 @freezed
 class PesananModel with _$PesananModel {
   const factory PesananModel(
-      {required String id,
+      {int? id,
       required String namaPemesan,
-      required String nomorPemesan,
+      required num nomorPemesan,
       required String namaRekeningPemesan,
-      required String nomorRekeningPemesan,
+      required num nomorRekeningPemesan,
       required String namaBankPemesan,
-      required WisataModel wisata,
-      required RekeningModel rekeningPenerima,
-      required String jumlahTicket,
+      required num wisata,
+      required num rekeningPenerima,
+      required num jumlahTicket,
       required String totalHarga,
       required String image,
-      required String ownerId,
+      required int ownerId,
+      required String creator,
       required String status}) = _PesananModel;
 
   factory PesananModel.fromJson(Map<String, dynamic> json) =>

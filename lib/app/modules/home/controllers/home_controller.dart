@@ -8,11 +8,9 @@ import 'package:reza_reservation/app/data/model/rekening/repo/rekening_repo.dart
 import 'package:reza_reservation/app/data/model/user/user_model.dart';
 import 'package:reza_reservation/app/data/model/wisata/repo/wisata_repo.dart';
 import 'package:reza_reservation/app/data/model/wisata/wisata_model.dart';
-import 'package:reza_reservation/app/data/services/dio_service.dart';
 import 'package:reza_reservation/app/modules/home/views/home_view.dart';
 
 class HomeController extends GetxController {
-  final dioService = DioService();
   UserModel get user => Get.arguments;
   final rekeningRepo = RekeningRepo();
   final pesananRepo = PesananRepo();
@@ -37,27 +35,33 @@ class HomeController extends GetxController {
   RxList<WisataModel> daftarWisata = RxList.empty();
 
   Future getRekening() async {
-    daftarRekening.value = await dioService.ReadRekening();
+    daftarRekening.value = await rekeningRepo.getAllRekening();
   }
 
   Future deleteRekening({required int id}) async {
-    await dioService.deleteRekening(id: id);
+    await rekeningRepo.deleteRekening(id: id);
     await getRekening();
   }
 
   Future getWisata() async {
-    daftarWisata.value = await dioService.ReadWisata();
+    daftarWisata.value = await wisataRepo.getAllWisata();
   }
 
   Future deleteWisata({required int id}) async {
-    await dioService.deleteWisata(id: id);
+    await wisataRepo.deleteWisata(id: id);
     await getWisata();
+  }
+
+  Future getPesanan() async {
+    daftarPesanan.value =
+        await pesananRepo.getAllPesanan(accountType: user.accountType);
   }
 
   @override
   void onInit() async {
     getRekening();
     getWisata();
+    getPesanan();
     super.onInit();
   }
 }

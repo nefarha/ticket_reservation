@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'pesanan_model.dart';
+part of 'pesanan_view_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,20 +14,20 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-PesananModel _$PesananModelFromJson(Map<String, dynamic> json) {
-  return _PesananModel.fromJson(json);
+PesananViewModel _$PesananViewModelFromJson(Map<String, dynamic> json) {
+  return _PesananViewModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PesananModel {
+mixin _$PesananViewModel {
   int? get id => throw _privateConstructorUsedError;
   String get namaPemesan => throw _privateConstructorUsedError;
   num get nomorPemesan => throw _privateConstructorUsedError;
   String get namaRekeningPemesan => throw _privateConstructorUsedError;
   num get nomorRekeningPemesan => throw _privateConstructorUsedError;
   String get namaBankPemesan => throw _privateConstructorUsedError;
-  num get wisata => throw _privateConstructorUsedError;
-  num get rekeningPenerima => throw _privateConstructorUsedError;
+  WisataModel get wisata => throw _privateConstructorUsedError;
+  RekeningModel get rekeningPenerima => throw _privateConstructorUsedError;
   num get jumlahTicket => throw _privateConstructorUsedError;
   String get totalHarga => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
@@ -37,15 +37,15 @@ mixin _$PesananModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PesananModelCopyWith<PesananModel> get copyWith =>
+  $PesananViewModelCopyWith<PesananViewModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PesananModelCopyWith<$Res> {
-  factory $PesananModelCopyWith(
-          PesananModel value, $Res Function(PesananModel) then) =
-      _$PesananModelCopyWithImpl<$Res, PesananModel>;
+abstract class $PesananViewModelCopyWith<$Res> {
+  factory $PesananViewModelCopyWith(
+          PesananViewModel value, $Res Function(PesananViewModel) then) =
+      _$PesananViewModelCopyWithImpl<$Res, PesananViewModel>;
   @useResult
   $Res call(
       {int? id,
@@ -54,20 +54,23 @@ abstract class $PesananModelCopyWith<$Res> {
       String namaRekeningPemesan,
       num nomorRekeningPemesan,
       String namaBankPemesan,
-      num wisata,
-      num rekeningPenerima,
+      WisataModel wisata,
+      RekeningModel rekeningPenerima,
       num jumlahTicket,
       String totalHarga,
       String image,
       int ownerId,
       String creator,
       String status});
+
+  $WisataModelCopyWith<$Res> get wisata;
+  $RekeningModelCopyWith<$Res> get rekeningPenerima;
 }
 
 /// @nodoc
-class _$PesananModelCopyWithImpl<$Res, $Val extends PesananModel>
-    implements $PesananModelCopyWith<$Res> {
-  _$PesananModelCopyWithImpl(this._value, this._then);
+class _$PesananViewModelCopyWithImpl<$Res, $Val extends PesananViewModel>
+    implements $PesananViewModelCopyWith<$Res> {
+  _$PesananViewModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -120,11 +123,11 @@ class _$PesananModelCopyWithImpl<$Res, $Val extends PesananModel>
       wisata: null == wisata
           ? _value.wisata
           : wisata // ignore: cast_nullable_to_non_nullable
-              as num,
+              as WisataModel,
       rekeningPenerima: null == rekeningPenerima
           ? _value.rekeningPenerima
           : rekeningPenerima // ignore: cast_nullable_to_non_nullable
-              as num,
+              as RekeningModel,
       jumlahTicket: null == jumlahTicket
           ? _value.jumlahTicket
           : jumlahTicket // ignore: cast_nullable_to_non_nullable
@@ -151,14 +154,30 @@ class _$PesananModelCopyWithImpl<$Res, $Val extends PesananModel>
               as String,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WisataModelCopyWith<$Res> get wisata {
+    return $WisataModelCopyWith<$Res>(_value.wisata, (value) {
+      return _then(_value.copyWith(wisata: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RekeningModelCopyWith<$Res> get rekeningPenerima {
+    return $RekeningModelCopyWith<$Res>(_value.rekeningPenerima, (value) {
+      return _then(_value.copyWith(rekeningPenerima: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$PesananModelImplCopyWith<$Res>
-    implements $PesananModelCopyWith<$Res> {
-  factory _$$PesananModelImplCopyWith(
-          _$PesananModelImpl value, $Res Function(_$PesananModelImpl) then) =
-      __$$PesananModelImplCopyWithImpl<$Res>;
+abstract class _$$PesananViewModelImplCopyWith<$Res>
+    implements $PesananViewModelCopyWith<$Res> {
+  factory _$$PesananViewModelImplCopyWith(_$PesananViewModelImpl value,
+          $Res Function(_$PesananViewModelImpl) then) =
+      __$$PesananViewModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -168,22 +187,27 @@ abstract class _$$PesananModelImplCopyWith<$Res>
       String namaRekeningPemesan,
       num nomorRekeningPemesan,
       String namaBankPemesan,
-      num wisata,
-      num rekeningPenerima,
+      WisataModel wisata,
+      RekeningModel rekeningPenerima,
       num jumlahTicket,
       String totalHarga,
       String image,
       int ownerId,
       String creator,
       String status});
+
+  @override
+  $WisataModelCopyWith<$Res> get wisata;
+  @override
+  $RekeningModelCopyWith<$Res> get rekeningPenerima;
 }
 
 /// @nodoc
-class __$$PesananModelImplCopyWithImpl<$Res>
-    extends _$PesananModelCopyWithImpl<$Res, _$PesananModelImpl>
-    implements _$$PesananModelImplCopyWith<$Res> {
-  __$$PesananModelImplCopyWithImpl(
-      _$PesananModelImpl _value, $Res Function(_$PesananModelImpl) _then)
+class __$$PesananViewModelImplCopyWithImpl<$Res>
+    extends _$PesananViewModelCopyWithImpl<$Res, _$PesananViewModelImpl>
+    implements _$$PesananViewModelImplCopyWith<$Res> {
+  __$$PesananViewModelImplCopyWithImpl(_$PesananViewModelImpl _value,
+      $Res Function(_$PesananViewModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -204,7 +228,7 @@ class __$$PesananModelImplCopyWithImpl<$Res>
     Object? creator = null,
     Object? status = null,
   }) {
-    return _then(_$PesananModelImpl(
+    return _then(_$PesananViewModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -232,11 +256,11 @@ class __$$PesananModelImplCopyWithImpl<$Res>
       wisata: null == wisata
           ? _value.wisata
           : wisata // ignore: cast_nullable_to_non_nullable
-              as num,
+              as WisataModel,
       rekeningPenerima: null == rekeningPenerima
           ? _value.rekeningPenerima
           : rekeningPenerima // ignore: cast_nullable_to_non_nullable
-              as num,
+              as RekeningModel,
       jumlahTicket: null == jumlahTicket
           ? _value.jumlahTicket
           : jumlahTicket // ignore: cast_nullable_to_non_nullable
@@ -267,8 +291,8 @@ class __$$PesananModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PesananModelImpl implements _PesananModel {
-  const _$PesananModelImpl(
+class _$PesananViewModelImpl implements _PesananViewModel {
+  const _$PesananViewModelImpl(
       {this.id,
       required this.namaPemesan,
       required this.nomorPemesan,
@@ -284,8 +308,8 @@ class _$PesananModelImpl implements _PesananModel {
       required this.creator,
       required this.status});
 
-  factory _$PesananModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PesananModelImplFromJson(json);
+  factory _$PesananViewModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PesananViewModelImplFromJson(json);
 
   @override
   final int? id;
@@ -300,9 +324,9 @@ class _$PesananModelImpl implements _PesananModel {
   @override
   final String namaBankPemesan;
   @override
-  final num wisata;
+  final WisataModel wisata;
   @override
-  final num rekeningPenerima;
+  final RekeningModel rekeningPenerima;
   @override
   final num jumlahTicket;
   @override
@@ -318,14 +342,14 @@ class _$PesananModelImpl implements _PesananModel {
 
   @override
   String toString() {
-    return 'PesananModel(id: $id, namaPemesan: $namaPemesan, nomorPemesan: $nomorPemesan, namaRekeningPemesan: $namaRekeningPemesan, nomorRekeningPemesan: $nomorRekeningPemesan, namaBankPemesan: $namaBankPemesan, wisata: $wisata, rekeningPenerima: $rekeningPenerima, jumlahTicket: $jumlahTicket, totalHarga: $totalHarga, image: $image, ownerId: $ownerId, creator: $creator, status: $status)';
+    return 'PesananViewModel(id: $id, namaPemesan: $namaPemesan, nomorPemesan: $nomorPemesan, namaRekeningPemesan: $namaRekeningPemesan, nomorRekeningPemesan: $nomorRekeningPemesan, namaBankPemesan: $namaBankPemesan, wisata: $wisata, rekeningPenerima: $rekeningPenerima, jumlahTicket: $jumlahTicket, totalHarga: $totalHarga, image: $image, ownerId: $ownerId, creator: $creator, status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PesananModelImpl &&
+            other is _$PesananViewModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.namaPemesan, namaPemesan) ||
                 other.namaPemesan == namaPemesan) &&
@@ -372,36 +396,37 @@ class _$PesananModelImpl implements _PesananModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PesananModelImplCopyWith<_$PesananModelImpl> get copyWith =>
-      __$$PesananModelImplCopyWithImpl<_$PesananModelImpl>(this, _$identity);
+  _$$PesananViewModelImplCopyWith<_$PesananViewModelImpl> get copyWith =>
+      __$$PesananViewModelImplCopyWithImpl<_$PesananViewModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PesananModelImplToJson(
+    return _$$PesananViewModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _PesananModel implements PesananModel {
-  const factory _PesananModel(
+abstract class _PesananViewModel implements PesananViewModel {
+  const factory _PesananViewModel(
       {final int? id,
       required final String namaPemesan,
       required final num nomorPemesan,
       required final String namaRekeningPemesan,
       required final num nomorRekeningPemesan,
       required final String namaBankPemesan,
-      required final num wisata,
-      required final num rekeningPenerima,
+      required final WisataModel wisata,
+      required final RekeningModel rekeningPenerima,
       required final num jumlahTicket,
       required final String totalHarga,
       required final String image,
       required final int ownerId,
       required final String creator,
-      required final String status}) = _$PesananModelImpl;
+      required final String status}) = _$PesananViewModelImpl;
 
-  factory _PesananModel.fromJson(Map<String, dynamic> json) =
-      _$PesananModelImpl.fromJson;
+  factory _PesananViewModel.fromJson(Map<String, dynamic> json) =
+      _$PesananViewModelImpl.fromJson;
 
   @override
   int? get id;
@@ -416,9 +441,9 @@ abstract class _PesananModel implements PesananModel {
   @override
   String get namaBankPemesan;
   @override
-  num get wisata;
+  WisataModel get wisata;
   @override
-  num get rekeningPenerima;
+  RekeningModel get rekeningPenerima;
   @override
   num get jumlahTicket;
   @override
@@ -433,6 +458,6 @@ abstract class _PesananModel implements PesananModel {
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$PesananModelImplCopyWith<_$PesananModelImpl> get copyWith =>
+  _$$PesananViewModelImplCopyWith<_$PesananViewModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

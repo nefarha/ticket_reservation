@@ -1,46 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reza_reservation/app/data/enums/enums.dart';
 import 'package:reza_reservation/app/data/model/pesanan/pesanan_model.dart';
+import 'package:reza_reservation/app/data/model/pesanan/viewModel/pesanan_view_model.dart';
 import 'package:reza_reservation/app/data/services/dio_service.dart';
 
 class PesananRepo {
   final dio = DioService();
-  final _pesananStore =
-      FirebaseFirestore.instance.collection('pesanan').withConverter(
-            fromFirestore: (snapshot, options) =>
-                PesananModel.fromJson(snapshot.data()!),
-            toFirestore: (value, options) => value.toJson(),
-          );
 
   Future createPesanan({required PesananModel pesanan}) async {
-    await _pesananStore.doc(pesanan.id).set(pesanan);
+    await dio.CreatePesanan(model: pesanan);
   }
 
   Future updatePesanan(
-      {required PesananModel pesanan, required StatusPesanan newStatus}) async {
-    await _pesananStore
-        .doc(pesanan.id)
-        .update(pesanan.copyWith(status: newStatus.name).toJson());
+      {required int id, required StatusPesanan newStatus}) async {
+    await dio.updatePesanan(id: id, newStatus: newStatus.name);
   }
 
-  Stream<List<PesananModel>> getAllPesanan(
-      {required bool isAdmin, required String userId}) {
-    if (isAdmin) {
-      return _pesananStore.snapshots().map(
-            (event) => event.docs
-                .map(
-                  (e) => e.data(),
-                )
-                .toList(),
-          );
-    } else {
-      return _pesananStore.where('ownerId', isEqualTo: userId).snapshots().map(
-            (event) => event.docs
-                .map(
-                  (e) => e.data(),
-                )
-                .toList(),
-          );
-    }
+  Future<PesananViewModel?> showPesanan({required int id}) async {
+    return await dio.showPesanan(id: id);
+  }
+
+  Future<List<PesananModel>> getAllPesanan(
+      {required String accountType}) async {
+    return await dio.ReadPesanan(accountType: accountType);
   }
 }
