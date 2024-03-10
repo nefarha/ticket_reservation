@@ -123,6 +123,49 @@ class SignInPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: ColorPalette.backgroundColor,
+                  boxShadow: Reusable.deafultBoxShadow,
+                ),
+                child: Obx(
+                  () => Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: AccountType.values
+                        .map(
+                          (e) => ListTile(
+                            onTap: () {
+                              controller.selectedAccountType.value = e;
+                            },
+                            leading: controller.selectedAccountType.value == e
+                                ? const Icon(
+                                    Icons.radio_button_checked,
+                                    color: ColorPalette.activeColor,
+                                  )
+                                : Icon(
+                                    Icons.radio_button_off,
+                                    color: Colors.grey.shade500,
+                                  ),
+                            title: Text(
+                              e.name.capitalizeFirst!,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            subtitle: Text(e == AccountType.admin
+                                ? "untuk admin"
+                                : 'untuk pemesan'),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               GestureDetector(
                 onTap: () async {
                   if (signInForm.currentState!.validate()) {
