@@ -6,8 +6,8 @@ part 'wisata_model.g.dart';
 @freezed
 class WisataModel with _$WisataModel {
   const factory WisataModel({
-    required String id,
-    required String nama_wisata,
+    int? id,
+    required String namaWisata,
     required num harga,
   }) = _WisataModel;
 

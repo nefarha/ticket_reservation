@@ -139,7 +139,7 @@ class DetailPesananView extends GetView<DetailPesananController> {
                   ListTile(
                     contentPadding: const EdgeInsets.all(0),
                     title: Text(
-                      controller.pesananModel.wisata.nama_wisata,
+                      controller.pesananModel.wisata.namaWisata,
                       style: const TextStyle(
                           fontWeight: FontWeight.w500, fontSize: 16),
                     ),

@@ -20,8 +20,8 @@ WisataModel _$WisataModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WisataModel {
-  String get id => throw _privateConstructorUsedError;
-  String get nama_wisata => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String get namaWisata => throw _privateConstructorUsedError;
   num get harga => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $WisataModelCopyWith<$Res> {
           WisataModel value, $Res Function(WisataModel) then) =
       _$WisataModelCopyWithImpl<$Res, WisataModel>;
   @useResult
-  $Res call({String id, String nama_wisata, num harga});
+  $Res call({int? id, String namaWisata, num harga});
 }
 
 /// @nodoc
@@ -52,18 +52,18 @@ class _$WisataModelCopyWithImpl<$Res, $Val extends WisataModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? nama_wisata = null,
+    Object? id = freezed,
+    Object? namaWisata = null,
     Object? harga = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      nama_wisata: null == nama_wisata
-          ? _value.nama_wisata
-          : nama_wisata // ignore: cast_nullable_to_non_nullable
+              as int?,
+      namaWisata: null == namaWisata
+          ? _value.namaWisata
+          : namaWisata // ignore: cast_nullable_to_non_nullable
               as String,
       harga: null == harga
           ? _value.harga
@@ -81,7 +81,7 @@ abstract class _$$WisataModelImplCopyWith<$Res>
       __$$WisataModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String nama_wisata, num harga});
+  $Res call({int? id, String namaWisata, num harga});
 }
 
 /// @nodoc
@@ -95,18 +95,18 @@ class __$$WisataModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? nama_wisata = null,
+    Object? id = freezed,
+    Object? namaWisata = null,
     Object? harga = null,
   }) {
     return _then(_$WisataModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      nama_wisata: null == nama_wisata
-          ? _value.nama_wisata
-          : nama_wisata // ignore: cast_nullable_to_non_nullable
+              as int?,
+      namaWisata: null == namaWisata
+          ? _value.namaWisata
+          : namaWisata // ignore: cast_nullable_to_non_nullable
               as String,
       harga: null == harga
           ? _value.harga
@@ -120,21 +120,21 @@ class __$$WisataModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WisataModelImpl implements _WisataModel {
   const _$WisataModelImpl(
-      {required this.id, required this.nama_wisata, required this.harga});
+      {this.id, required this.namaWisata, required this.harga});
 
   factory _$WisataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WisataModelImplFromJson(json);
 
   @override
-  final String id;
+  final int? id;
   @override
-  final String nama_wisata;
+  final String namaWisata;
   @override
   final num harga;
 
   @override
   String toString() {
-    return 'WisataModel(id: $id, nama_wisata: $nama_wisata, harga: $harga)';
+    return 'WisataModel(id: $id, namaWisata: $namaWisata, harga: $harga)';
   }
 
   @override
@@ -143,14 +143,14 @@ class _$WisataModelImpl implements _WisataModel {
         (other.runtimeType == runtimeType &&
             other is _$WisataModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.nama_wisata, nama_wisata) ||
-                other.nama_wisata == nama_wisata) &&
+            (identical(other.namaWisata, namaWisata) ||
+                other.namaWisata == namaWisata) &&
             (identical(other.harga, harga) || other.harga == harga));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nama_wisata, harga);
+  int get hashCode => Object.hash(runtimeType, id, namaWisata, harga);
 
   @JsonKey(ignore: true)
   @override
@@ -168,17 +168,17 @@ class _$WisataModelImpl implements _WisataModel {
 
 abstract class _WisataModel implements WisataModel {
   const factory _WisataModel(
-      {required final String id,
-      required final String nama_wisata,
+      {final int? id,
+      required final String namaWisata,
       required final num harga}) = _$WisataModelImpl;
 
   factory _WisataModel.fromJson(Map<String, dynamic> json) =
       _$WisataModelImpl.fromJson;
 
   @override
-  String get id;
+  int? get id;
   @override
-  String get nama_wisata;
+  String get namaWisata;
   @override
   num get harga;
   @override

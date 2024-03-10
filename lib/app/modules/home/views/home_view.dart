@@ -495,43 +495,48 @@ class WisataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      builder: (controller) => Column(
-        children: [
-          Row(
-            children: [
-              Flexible(
-                child: Reusable.customTextfield(
-                  hint: 'cari wisata dari nama',
-                  onChanged: (p0) => controller.rekeningSearch.value = p0,
-                ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Get.toNamed(Routes.TAMBAH_WISATA);
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: ColorPalette.buttonColor,
-                    boxShadow: Reusable.deafultBoxShadow,
-                  ),
-                  child: const Icon(
-                    Icons.add,
-                    color: ColorPalette.textButtonColor,
+      builder: (controller) => FocusDetector(
+        onFocusGained: () async {
+          await controller.getWisata();
+        },
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Flexible(
+                  child: Reusable.customTextfield(
+                    hint: 'cari wisata dari nama',
+                    onChanged: (p0) => controller.rekeningSearch.value = p0,
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const WisataBody(),
-        ],
+                const SizedBox(
+                  width: 20,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.TAMBAH_WISATA);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: ColorPalette.buttonColor,
+                      boxShadow: Reusable.deafultBoxShadow,
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      color: ColorPalette.textButtonColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const WisataBody(),
+          ],
+        ),
       ),
     );
   }
@@ -551,7 +556,7 @@ class WisataBody extends StatelessWidget {
                   ? ListView(
                       children: controller.daftarWisata.indexed
                           .where(
-                            (p0) => p0.$2.nama_wisata.toLowerCase().contains(
+                            (p0) => p0.$2.namaWisata.toLowerCase().contains(
                                 controller.rekeningSearch.toLowerCase()),
                           )
                           .map(
@@ -605,11 +610,11 @@ class WisataCard extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: const EdgeInsets.all(0),
-              title: const Text(
-                'model.nama_wisata.capitalizeFirst!',
+              title: Text(
+                model.namaWisata.capitalizeFirst!,
               ),
               subtitle: Text(
-                Reusable.moneyFormat(20000),
+                Reusable.moneyFormat(model.harga),
                 style: const TextStyle(
                   color: ColorPalette.buttonColor,
                   fontWeight: FontWeight.bold,
@@ -617,7 +622,7 @@ class WisataCard extends StatelessWidget {
               ),
               trailing: GestureDetector(
                 onTap: () async {
-                  // await controller.rekeningRepo.deleteRekening(rekening: model);
+                  await controller.deleteWisata(id: model.id!);
                 },
                 child: const Icon(
                   Icons.delete,

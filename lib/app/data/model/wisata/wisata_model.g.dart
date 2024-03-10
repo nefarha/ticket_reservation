@@ -8,14 +8,14 @@ part of 'wisata_model.dart';
 
 _$WisataModelImpl _$$WisataModelImplFromJson(Map<String, dynamic> json) =>
     _$WisataModelImpl(
-      id: json['id'] as String,
-      nama_wisata: json['nama_wisata'] as String,
+      id: json['id'] as int?,
+      namaWisata: json['nama_wisata'] as String,
       harga: json['harga'] as num,
     );
 
 Map<String, dynamic> _$$WisataModelImplToJson(_$WisataModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'nama_wisata': instance.nama_wisata,
+      'nama_wisata': instance.namaWisata,
       'harga': instance.harga,
     };

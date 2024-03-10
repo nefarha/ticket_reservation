@@ -1,29 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reza_reservation/app/data/model/wisata/wisata_model.dart';
+import 'package:reza_reservation/app/data/services/dio_service.dart';
 
 class WisataRepo {
-  final _wisataStore =
-      FirebaseFirestore.instance.collection('wisata').withConverter(
-            fromFirestore: (snapshot, options) =>
-                WisataModel.fromJson(snapshot.data()!),
-            toFirestore: (value, options) => value.toJson(),
-          );
+  final dio = DioService();
 
-  Stream<List<WisataModel>> getAllWisata() {
-    return _wisataStore.snapshots().map(
-          (event) => event.docs
-              .map(
-                (e) => e.data(),
-              )
-              .toList(),
-        );
+  Future<List<WisataModel>> getAllWisata() async {
+    return await dio.ReadWisata();
   }
 
   Future createWisata({required WisataModel model}) async {
-    await _wisataStore.doc(model.id).set(model);
+    await dio.CreateWisata(model: model);
   }
 
-  Future deleteWisata({required WisataModel model}) async {
-    await _wisataStore.doc(model.id).delete();
+  Future deleteWisata({required int id}) async {
+    await dio.deleteWisata(id: id);
   }
 }

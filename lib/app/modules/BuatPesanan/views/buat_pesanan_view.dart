@@ -146,7 +146,7 @@ class BuatPesananView extends GetView<BuatPesananController> {
                                         (e) => DropdownMenuItem(
                                           value: e,
                                           child: Text(
-                                              e.nama_wisata.capitalizeFirst!),
+                                              e.namaWisata.capitalizeFirst!),
                                         ),
                                       )
                                       .toList(),

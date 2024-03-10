@@ -87,9 +87,9 @@ class BuatPesananController extends GetxController {
   }
 
   @override
-  void onInit() {
-    // daftarRekening.bindStream(rekeningRepo.getAllRekening());
-    daftarWisata.bindStream(wisataRepo.getAllWisata());
+  void onInit() async {
+    daftarRekening.value = await rekeningRepo.getAllRekening();
+    daftarWisata.value = await wisataRepo.getAllWisata();
     super.onInit();
   }
 }

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:reza_reservation/app/data/model/base_response/base_response.dart';
 import 'package:reza_reservation/app/data/model/rekening/rekening_model.dart';
 import 'package:reza_reservation/app/data/model/user/user_model.dart';
+import 'package:reza_reservation/app/data/model/wisata/wisata_model.dart';
 
 class DioService {
   final dio = Dio(
@@ -11,7 +12,7 @@ class DioService {
   final adminUrl = '/admins';
   final pesananUrl = '/pesanans';
   final rekeningUrl = '/rekenings';
-  final wisataUrl = '/wisatas';
+  final wisataUrl = '/wisata';
 
   // Admins
   Future<BaseResponse> SignInAdmin({
@@ -85,7 +86,7 @@ class DioService {
     var response = await dio.get(rekeningUrl);
 
     final baseResponse = BaseResponse.fromJson(response.data);
-    if (baseResponse.status == 201) {
+    if (baseResponse.status == 200) {
       var list = baseResponse.data as List;
 
       List<RekeningModel> daftarRekening =
@@ -100,6 +101,40 @@ class DioService {
   Future deleteRekening({required int id}) async {
     await dio.delete(
       '$rekeningUrl/$id',
+    );
+  }
+
+  // Wisata
+  Future<BaseResponse> CreateWisata({
+    required WisataModel model,
+  }) async {
+    var response = await dio.post(wisataUrl, data: model.toJson());
+
+    final baseResponse = BaseResponse.fromJson(response.data);
+
+    return baseResponse;
+  }
+
+  Future<List<WisataModel>> ReadWisata() async {
+    var response = await dio.get(wisataUrl);
+
+    final baseResponse = BaseResponse.fromJson(response.data);
+    if (baseResponse.status == 200) {
+      var list = baseResponse.data as List;
+      print(list);
+
+      List<WisataModel> daftarWisata =
+          list.map((e) => WisataModel.fromJson(e)).toList();
+
+      return daftarWisata;
+    } else {
+      return [];
+    }
+  }
+
+  Future deleteWisata({required int id}) async {
+    await dio.delete(
+      '$wisataUrl/$id',
     );
   }
 }

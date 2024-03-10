@@ -13,8 +13,7 @@ class TambahWisataController extends GetxController {
   Future createWIsata() async {
     isLoading.toggle();
     var model = WisataModel(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        nama_wisata: namaController.text,
+        namaWisata: namaController.text,
         harga: int.parse(hargaController.text));
 
     await wisataRepo.createWisata(model: model);

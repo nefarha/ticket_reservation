@@ -45,9 +45,19 @@ class HomeController extends GetxController {
     await getRekening();
   }
 
+  Future getWisata() async {
+    daftarWisata.value = await dioService.ReadWisata();
+  }
+
+  Future deleteWisata({required int id}) async {
+    await dioService.deleteWisata(id: id);
+    await getWisata();
+  }
+
   @override
   void onInit() async {
     getRekening();
+    getWisata();
     super.onInit();
   }
 }
