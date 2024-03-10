@@ -53,7 +53,13 @@ class AuthenticatinoController extends GetxController {
       password: passwordController.text,
       accountType: selectedAccountType.value.name,
     );
-    var baseResponse = await dioService.SignUpAdmin(model: user);
+    BaseResponse baseResponse;
+
+    if (selectedAccountType.value == AccountType.admin) {
+      baseResponse = await dioService.SignUpAdmin(model: user);
+    } else {
+      baseResponse = await dioService.SignUpUser(model: user);
+    }
 
     if (baseResponse.status == 200) {
       isLoading.toggle();

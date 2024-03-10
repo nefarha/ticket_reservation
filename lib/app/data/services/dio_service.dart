@@ -59,5 +59,15 @@ class DioService {
     return baseResponse;
   }
 
+  Future<BaseResponse> SignUpUser({
+    required UserModel model,
+  }) async {
+    var response = await dio.post(userUrl, data: model.toJson());
+
+    final baseResponse = BaseResponse.fromJson(response.data);
+
+    return baseResponse;
+  }
+
   // Rekenings
 }
