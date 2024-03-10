@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reza_reservation/app/data/model/rekening/rekening_model.dart';
+import 'package:reza_reservation/app/data/services/dio_service.dart';
 
 class RekeningRepo {
+  final dioService = DioService();
   final _rekeningStore =
       FirebaseFirestore.instance.collection('rekening').withConverter(
             fromFirestore: (snapshot, options) =>
@@ -10,20 +12,14 @@ class RekeningRepo {
           );
 
   Future createRekening({required RekeningModel rekening}) async {
-    await _rekeningStore.doc(rekening.id).set(rekening);
+    final baseResponse = await dioService.CreateRekening(model: rekening);
   }
 
-  Future deleteRekening({required RekeningModel rekening}) async {
-    await _rekeningStore.doc(rekening.id).delete();
+  Future deleteRekening({required int id}) async {
+    await dioService.deleteRekening(id: id);
   }
 
-  Stream<List<RekeningModel>> getAllRekening() {
-    return _rekeningStore.snapshots().map(
-          (event) => event.docs
-              .map(
-                (e) => e.data(),
-              )
-              .toList(),
-        );
+  Future<List<RekeningModel>> getAllRekening() async {
+    return await dioService.ReadRekening();
   }
 }

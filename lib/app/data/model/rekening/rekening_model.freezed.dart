@@ -20,7 +20,7 @@ RekeningModel _$RekeningModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RekeningModel {
-  String get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get bank_name => throw _privateConstructorUsedError;
   String get number => throw _privateConstructorUsedError;
@@ -39,11 +39,7 @@ abstract class $RekeningModelCopyWith<$Res> {
       _$RekeningModelCopyWithImpl<$Res, RekeningModel>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String bank_name,
-      String number,
-      String ownerId});
+      {int? id, String name, String bank_name, String number, String ownerId});
 }
 
 /// @nodoc
@@ -59,17 +55,17 @@ class _$RekeningModelCopyWithImpl<$Res, $Val extends RekeningModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? bank_name = null,
     Object? number = null,
     Object? ownerId = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -99,11 +95,7 @@ abstract class _$$RekeningModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String bank_name,
-      String number,
-      String ownerId});
+      {int? id, String name, String bank_name, String number, String ownerId});
 }
 
 /// @nodoc
@@ -117,17 +109,17 @@ class __$$RekeningModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? bank_name = null,
     Object? number = null,
     Object? ownerId = null,
   }) {
     return _then(_$RekeningModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -152,7 +144,7 @@ class __$$RekeningModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RekeningModelImpl implements _RekeningModel {
   const _$RekeningModelImpl(
-      {required this.id,
+      {this.id,
       required this.name,
       required this.bank_name,
       required this.number,
@@ -162,7 +154,7 @@ class _$RekeningModelImpl implements _RekeningModel {
       _$$RekeningModelImplFromJson(json);
 
   @override
-  final String id;
+  final int? id;
   @override
   final String name;
   @override
@@ -211,7 +203,7 @@ class _$RekeningModelImpl implements _RekeningModel {
 
 abstract class _RekeningModel implements RekeningModel {
   const factory _RekeningModel(
-      {required final String id,
+      {final int? id,
       required final String name,
       required final String bank_name,
       required final String number,
@@ -221,7 +213,7 @@ abstract class _RekeningModel implements RekeningModel {
       _$RekeningModelImpl.fromJson;
 
   @override
-  String get id;
+  int? get id;
   @override
   String get name;
   @override

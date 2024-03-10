@@ -57,7 +57,7 @@ class BuatPesananController extends GetxController {
         selectedWisata.value != null) {
       await storageC
           .uploadBuktiGambar(
-        id: user!.id,
+        id: user!.id.toString(),
         file: File(selectedImage.value!),
       )
           .then((value) async {
@@ -73,7 +73,7 @@ class BuatPesananController extends GetxController {
           totalHarga: totalHarga,
           rekeningPenerima: selectedRekening.value!,
           image: value,
-          ownerId: user!.id,
+          ownerId: user!.id.toString(),
           status: StatusPesanan.pending.name,
         );
         await pesananRepo.createPesanan(pesanan: pesanan);
@@ -88,7 +88,7 @@ class BuatPesananController extends GetxController {
 
   @override
   void onInit() {
-    daftarRekening.bindStream(rekeningRepo.getAllRekening());
+    // daftarRekening.bindStream(rekeningRepo.getAllRekening());
     daftarWisata.bindStream(wisataRepo.getAllWisata());
     super.onInit();
   }

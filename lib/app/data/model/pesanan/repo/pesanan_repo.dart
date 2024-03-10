@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reza_reservation/app/data/enums/enums.dart';
 import 'package:reza_reservation/app/data/model/pesanan/pesanan_model.dart';
+import 'package:reza_reservation/app/data/services/dio_service.dart';
 
 class PesananRepo {
+  final dio = DioService();
   final _pesananStore =
       FirebaseFirestore.instance.collection('pesanan').withConverter(
             fromFirestore: (snapshot, options) =>

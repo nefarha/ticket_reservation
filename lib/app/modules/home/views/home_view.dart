@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_detector_v2/focus_detector_v2.dart';
 import 'package:get/get.dart';
 import 'package:reza_reservation/app/data/addon/color_paletter.dart';
 import 'package:reza_reservation/app/data/addon/reusable.dart';
@@ -22,7 +23,7 @@ class HomeView extends GetView<HomeController> {
           actions: [
             IconButton(
               onPressed: () async {
-                await controller.authC.logOut();
+                Get.offAllNamed(Routes.AUTHENTICATINO);
               },
               icon: const Icon(
                 Icons.logout,
@@ -31,7 +32,7 @@ class HomeView extends GetView<HomeController> {
             ),
           ],
         ),
-        drawer: controller.user.value?.accountType == AccountType.admin.name
+        drawer: controller.user.accountType == AccountType.admin.name
             ? const Drawer(
                 child: HomeDrawer(),
               )
@@ -335,15 +336,22 @@ class RekeningPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        RekeningHeaderView(),
-        SizedBox(
-          height: 20,
+    return GetBuilder<HomeController>(builder: (controller) {
+      return FocusDetector(
+        onFocusGained: () async {
+          await controller.getRekening();
+        },
+        child: const Column(
+          children: [
+            RekeningHeaderView(),
+            SizedBox(
+              height: 20,
+            ),
+            RekeningBodyList(),
+          ],
         ),
-        RekeningBodyList(),
-      ],
-    );
+      );
+    });
   }
 }
 
@@ -366,7 +374,7 @@ class RekeningHeaderView extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Get.toNamed(Routes.TAMBAH_REKENING);
+              Get.toNamed(Routes.TAMBAH_REKENING, arguments: controller.user);
             },
             child: Container(
               padding: const EdgeInsets.all(16),
@@ -466,7 +474,7 @@ class RekeningItemCard extends StatelessWidget {
               ),
               trailing: GestureDetector(
                 onTap: () async {
-                  await controller.rekeningRepo.deleteRekening(rekening: model);
+                  await controller.deleteRekening(id: model.id!);
                 },
                 child: const Icon(
                   Icons.delete,
@@ -597,11 +605,11 @@ class WisataCard extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: const EdgeInsets.all(0),
-              title: Text(
-                model.nama_wisata.capitalizeFirst!,
+              title: const Text(
+                'model.nama_wisata.capitalizeFirst!',
               ),
               subtitle: Text(
-                Reusable.moneyFormat(model.harga),
+                Reusable.moneyFormat(20000),
                 style: const TextStyle(
                   color: ColorPalette.buttonColor,
                   fontWeight: FontWeight.bold,

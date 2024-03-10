@@ -9,11 +9,4 @@ class UserController extends GetxController {
   final accountRepo = UserRepo();
 
   Rxn<UserModel> user = Rxn();
-
-  @override
-  void onInit() {
-    user.bindStream(accountRepo.readAccount(id: authC.nullOrUser.value!.uid));
-
-    super.onInit();
-  }
 }

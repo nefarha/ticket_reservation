@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     Get.put(StorageController());
     return GetMaterialApp(
       title: "Reservation",
-      initialRoute: AppPages.INITIAL,
+      initialRoute: Routes.AUTHENTICATINO,
       getPages: AppPages.routes,
       theme: ReservationThemeData.defaultTheme(),
     );

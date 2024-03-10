@@ -6,7 +6,7 @@ part 'rekening_model.g.dart';
 @freezed
 class RekeningModel with _$RekeningModel {
   const factory RekeningModel({
-    required String id,
+    int? id,
     required String name,
     required String bank_name,
     required String number,

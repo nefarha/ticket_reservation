@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import '../data/middlewares/home_auth_middlewares.dart';
 import '../modules/Authenticatino/bindings/authenticatino_binding.dart';
 import '../modules/Authenticatino/views/authenticatino_view.dart';
 import '../modules/BuatPesanan/bindings/buat_pesanan_binding.dart';
@@ -28,9 +27,6 @@ class AppPages {
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
-      middlewares: [
-        HomeAuthMiddlewares(priority: 0),
-      ],
     ),
     GetPage(
       name: _Paths.BUAT_PESANAN,
