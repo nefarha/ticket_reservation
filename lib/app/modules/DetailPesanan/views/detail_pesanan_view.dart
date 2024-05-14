@@ -33,7 +33,12 @@ class DetailPesananView extends GetView<DetailPesananController> {
                 ),
                 child: Center(
                   child: Text(
-                    controller.pesananModel.value!.status.toUpperCase(),
+                    StatusPesanan.values
+                            .firstWhereOrNull((element) =>
+                                element.name ==
+                                controller.pesananModel.value!.status)
+                            ?.code ??
+                        '',
                     style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -237,64 +242,125 @@ class DetailPesananView extends GetView<DetailPesananController> {
               const SizedBox(
                 height: 30,
               ),
-              if (controller.user.accountType == AccountType.admin.name &&
-                  controller.pesananModel.value!.status ==
-                      StatusPesanan.pending.name)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: GestureDetector(
-                          onTap: () async {
-                            await controller.updatePesanan(isAccept: true);
-                          },
-                          child: Container(
-                            height: 50,
-                            width: Get.width,
-                            decoration: BoxDecoration(
-                              color: ColorPalette.buttonColor,
-                              borderRadius: BorderRadius.circular(15),
+              (controller.user.accountType == AccountType.admin.name &&
+                      (controller.pesananModel.value!.status ==
+                              StatusPesanan.pending.name ||
+                          controller.pesananModel.value!.status ==
+                              StatusPesanan.req_cancel.name))
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await controller.updatePesanan(
+                                        isAccept: true);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: Get.width,
+                                    decoration: BoxDecoration(
+                                      color: ColorPalette.buttonColor,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        'Terima',
+                                        style: TextStyle(
+                                            color:
+                                                ColorPalette.textButtonColor),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await controller.updatePesanan(
+                                        isAccept: false);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: Get.width,
+                                    decoration: BoxDecoration(
+                                      color: ColorPalette.activeColor,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        'Tolak',
+                                        style: TextStyle(
+                                            color:
+                                                ColorPalette.backgroundColor),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          if (controller.pesananModel.value!.status ==
+                              StatusPesanan.req_cancel.name)
+                            GestureDetector(
+                              onTap: () async {
+                                await controller.adminCancelPesanan();
+                              },
+                              child: Container(
+                                height: 50,
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: Colors.red.shade300,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Batalkan',
+                                    style: TextStyle(
+                                        color: ColorPalette.textButtonColor),
+                                  ),
+                                ),
+                              ),
                             ),
-                            child: const Center(
-                              child: Text(
-                                'Terima',
-                                style: TextStyle(
-                                    color: ColorPalette.textButtonColor),
+                        ],
+                      ),
+                    )
+                  : controller.pesananModel.value!.status ==
+                          StatusPesanan.req_cancel.name
+                      ? Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 20),
+                          child: GestureDetector(
+                            onTap: () async {
+                              await controller.cancelPesanan();
+                            },
+                            child: Container(
+                              height: 50,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                color: Colors.red.shade300,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Batalkan',
+                                  style: TextStyle(
+                                      color: ColorPalette.textButtonColor),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Flexible(
-                        child: GestureDetector(
-                          onTap: () async {
-                            await controller.updatePesanan(isAccept: false);
-                          },
-                          child: Container(
-                            height: 50,
-                            width: Get.width,
-                            decoration: BoxDecoration(
-                              color: ColorPalette.activeColor,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Tolak',
-                                style: TextStyle(
-                                    color: ColorPalette.backgroundColor),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
+                        )
+                      : const SizedBox(),
             ],
           ),
         ),

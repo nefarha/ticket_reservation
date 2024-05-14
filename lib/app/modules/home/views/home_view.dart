@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:focus_detector_v2/focus_detector_v2.dart';
 import 'package:get/get.dart';
 import 'package:reza_reservation/app/data/addon/color_paletter.dart';
@@ -116,11 +117,12 @@ class DataViewHeader extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                children: StatusPesanan.values
-                    .map(
-                      (e) => Expanded(
-                        child: Obx(
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: StatusPesanan.values
+                      .map(
+                        (e) => Obx(
                           () => GestureDetector(
                             onTap: () {
                               controller.selectedStatus.value = e;
@@ -141,7 +143,7 @@ class DataViewHeader extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  e.name.capitalize!,
+                                  e.code!,
                                   style: TextStyle(
                                     color: e == controller.selectedStatus.value
                                         ? Colors.black
@@ -152,9 +154,9 @@ class DataViewHeader extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
+                ),
               )
             ],
           ),

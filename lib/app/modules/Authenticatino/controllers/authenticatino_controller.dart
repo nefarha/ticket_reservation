@@ -72,5 +72,6 @@ class AuthenticatinoController extends GetxController {
       isLoading.toggle();
       Reusable.errorDialog(middleText: baseResponse.data);
     }
+    isLoading.toggle();
   }
 }

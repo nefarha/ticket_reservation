@@ -21,6 +21,18 @@ class DetailPesananController extends GetxController
     Get.back();
   }
 
+  Future cancelPesanan() async {
+    await pesananRepo.updatePesanan(
+        id: pesananModel.value!.id!, newStatus: StatusPesanan.req_cancel);
+    Get.back();
+  }
+
+  Future adminCancelPesanan() async {
+    await pesananRepo.updatePesanan(
+        id: pesananModel.value!.id!, newStatus: StatusPesanan.cancel);
+    Get.back();
+  }
+
   @override
   void onInit() async {
     pesananModel.value =

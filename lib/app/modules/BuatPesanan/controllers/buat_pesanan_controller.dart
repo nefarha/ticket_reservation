@@ -60,6 +60,7 @@ class BuatPesananController extends GetxController {
         file: File(selectedImage.value!),
       )
           .then((value) async {
+        print(value);
         var pesanan = PesananModel(
           namaPemesan: nameController.text,
           nomorPemesan: int.parse(nomorHpController.text),
