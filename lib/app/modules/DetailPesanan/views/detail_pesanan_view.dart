@@ -336,7 +336,7 @@ class DetailPesananView extends GetView<DetailPesananController> {
                       ),
                     )
                   : controller.pesananModel.value!.status ==
-                          StatusPesanan.req_cancel.name
+                          StatusPesanan.pending.name
                       ? Padding(
                           padding: const EdgeInsets.fromLTRB(8, 0, 8, 20),
                           child: GestureDetector(
